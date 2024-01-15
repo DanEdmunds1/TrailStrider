@@ -2,6 +2,21 @@
     background-color: rgb(235, 220, 15);
     height: 7vh;
     text-align: center;
-    border-radius: 10px;
-    margin: 0 0 20px 0;
+    margin: 0;
+
+    .logo-img {
+        height: 60px;
+        margin: 0;
+    }
+
+    .nav-profile-img {
+        height: 60px;
+    }
+
+    .color-scheme-toggle {
+        height: 60px;
+        &:hover {
+            cursor: pointer
+        }
+    }
 }

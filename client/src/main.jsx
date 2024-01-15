@@ -7,6 +7,7 @@ import App from './App.jsx'
 import Home from './components/Home.jsx'
 import AllTrails from './components/AllTrails.jsx'
 import SingleTrail from './components/SingleTrail.jsx'
+import Profile from './components/Profile.jsx'
 
 // Loaders
 import { trailLoader, singleTrailLoader } from './utils/loaders/trail.js'
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: '/trails/:trailId',
         element: <SingleTrail />,
         loader: async ({ params }) => singleTrailLoader(params.trailId)
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
   }

@@ -2,10 +2,20 @@
 
 export async function trailLoader() {
     const res = await fetch(`/api/trails`)
-    return res.json()
+    const trails = await res.json()
+
+    const res2 = await fetch('/api/hikers')
+    const hikers = await res2.json()
+
+    return { trails, hikers }
 }
 
 export async function singleTrailLoader(trailId) {
     const res = await fetch(`/api/trails/${trailId}`)
-    return res.json()
+    const trail = await res.json()
+
+    const res2 = await fetch('/api/hikers')
+    const hikers = await res2.json()
+
+    return { trail, hikers }
 }

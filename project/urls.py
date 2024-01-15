@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/trails/', include('trails.urls')),
     path('api/reviews/', include('reviews.urls')),
     path('api/regions/', include('regions.urls')),
+    path('api/hikers/', include('hikers.urls')),
     path('api/auth/', include('users.urls'))
 ]

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'reviews',
     'users',
     'countries',
-    'regions'
+    'regions',
+    'hikers'
 ]
 
 MIDDLEWARE = [
