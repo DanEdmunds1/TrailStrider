@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, Link } from "react-router-dom"
 
 export default function AllTrails() {
 
@@ -34,12 +34,14 @@ export default function AllTrails() {
                     let hours = Math.floor(totalMinutes / 60)
                     let minutes = (totalMinutes % 60)
                     return (
-                        <section key={trail.id} className="trail-card">
-                            <img src="" alt={`${trail.name} Image`} />
-                            <div className="trail-card-text-box">
-                                {trail.name} - {trail.length}km - {steps} steps - {hours}hrs {minutes}mins
-                            </div>
-                        </section>
+                        <Link key={trail.id} to={`/trails/${trail.id}`}>
+                            <section key={trail.id} className="trail-card">
+                                <img src="" alt={`${trail.name} Image`} />
+                                <div className="trail-card-text-box">
+                                    {trail.name} - {trail.length}km - {steps} steps - {hours}hrs {minutes}mins
+                                </div>
+                            </section>
+                        </Link>
                     )
                 })}
             </section>
