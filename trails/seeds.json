@@ -1,0 +1,47 @@
+[
+{
+  "model": "trails.trail",
+  "pk": 1,
+  "fields": {
+    "name": "North Downs",
+    "length": 4.0,
+    "elevation": 200.0,
+    "descent": 100.0,
+    "description": "This is a trail form x to y",
+    "difficulty": 0.0,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/North_Downs_Way_near_Hollingbourne_1.JPG",
+    "region": 1,
+    "owner": 1
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 2,
+  "fields": {
+    "name": "Long Trail",
+    "length": 0.6,
+    "elevation": 40.0,
+    "descent": 40.0,
+    "description": "This trail goes around a pond isnt that nice",
+    "difficulty": 2.0,
+    "image": null,
+    "region": 1,
+    "owner": 1
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 3,
+  "fields": {
+    "name": "Jambo Stroll",
+    "length": 9.0,
+    "elevation": 0.0,
+    "descent": 20.0,
+    "description": "A lovely stroll through rural boonsville",
+    "difficulty": 0.0,
+    "image": null,
+    "region": 1,
+    "owner": 3
+  }
+}
+]

@@ -11,7 +11,6 @@ export function setToken(token) {
 }
 
 export function getToken() {
-    console.log(tokenName)
     return localStorage.getItem(tokenName)
 }
 
@@ -22,16 +21,16 @@ export function removeToken() {
 export function activeUser() {
     const token = getToken()
     if (!token) return null
-
+ 
     const b64 = token.split('.')[1]
     const payload = JSON.parse(atob(b64))
+    console.log(payload)
 
     const now = Date.now() / 1000
     const exp = payload.exp
 
     if (exp > now) {
-        console.log(payload.sub)
-        return payload.sub
+        return payload
     } else {
         removeToken()
     }

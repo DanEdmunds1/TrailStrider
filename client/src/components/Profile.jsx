@@ -7,6 +7,7 @@ import icon6 from '../assets/avatars/icon6.png'
 import icon7 from '../assets/avatars/icon7.png'
 
 import { useState } from 'react'
+import { useLoaderData } from 'react-router-dom'
 
 export default function Profile() {
 // Set Profile Pic to local storage AND state
@@ -32,6 +33,8 @@ export default function Profile() {
         icon7,
     ]
 
+    const reviews = useLoaderData()
+    console.log(reviews)
 
 
 
@@ -58,7 +61,9 @@ export default function Profile() {
 
             {/* Use localsotrage setting and gettign to keep the profile picture */}
             <img src={userImage} alt="Selected Image" className="avatar-img" />
+            <section className="profile-reviews">
 
+            </section>
         </>
     )
 }

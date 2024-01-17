@@ -9,7 +9,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'password_confirmation', 'bio')
+        fields = ('id', 'username', 'email', 'password', 'password_confirmation')
 
     def validate(self, data):
         password = data.get('password')
@@ -22,3 +22,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+    
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

@@ -41,6 +41,10 @@ export default function CreateTrail() {
                 <label hidden htmlFor="region">Region</label>
                 <input type="text" name="region" placeholder='Region' />
 
+                <input type="text" name="owner" placeholder='Owner' />
+
+                <input type="text" name="difficulty" placeholder='Region' />
+
                 {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
 
                 <button className="btn btn-pink" type="submit">Create</button>
