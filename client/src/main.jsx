@@ -10,7 +10,6 @@ import SingleTrail from './components/SingleTrail.jsx'
 import Profile from './components/Profile.jsx'
 import CreateTrail from './components/CreateTrail.jsx'
 import EditTrail from './components/EditTrail.jsx'
-import CreateHiker from './components/CreateHiker.jsx'
 import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
 import ReviewTrail from './components/ReviewTrail.jsx'
@@ -61,16 +60,11 @@ const router = createBrowserRouter([
         action: async ({ request }) => createReview(request),
         loader: async ({ params }) => singleTrailLoader(params.trailId)
       },
-
-      {
-        path: '/hiker/create',
-        element: <CreateHiker />,
-        action: async ({ request }) => createHiker(request)
-      },
       {
         path: '/profile',
         element: <Profile />,
-        loader: getAllReviews
+        loader: getAllReviews,
+        action: async ({ request }) => createHiker(request)
       },
       {
         path: '/register',

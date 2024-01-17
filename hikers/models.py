@@ -11,6 +11,7 @@ ATHLETIC_ABILITY = (
 class Hiker(models.Model):
     name = models.CharField(max_length=100)
     height = models.FloatField()
+    picture = models.CharField(null=True, blank=True)
     ability = models.CharField(
         max_length = 30,
         choices = ATHLETIC_ABILITY,

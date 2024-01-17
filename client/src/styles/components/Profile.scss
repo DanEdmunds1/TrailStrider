@@ -4,7 +4,11 @@
     &:hover {
         cursor: pointer;
         transform: scale(1.1);
-    }
+    };
+    a:active {
+        transform: scale(1.1);
+        border: 1px solid black
+      }
 }
 
 .profile-top {
@@ -30,12 +34,17 @@
 
         .hiker-card-box {
             border: 1px solid red;
+            display: flex;
+            width: 100%;
+
             .hiker-card {
                 display: flex;
                 flex-direction: row;
                 border: 1px solid blue;
                 padding: 5px;
-                width: 100%;
+                width: 100px;
+                height: 100px;
+                margin: 10px;
                 .hiker-options {
                 font-weight: 900;
                 font-size: 20px;
@@ -55,7 +64,8 @@
     text-align: center;
 
     .profile-reviews {
-        border: 2px solid black;
-        text-align: center;
+        border: 2px solid rgb(211, 9, 9);
+        text-align: left;
+        padding: 10px 0 10px 10px;
     }
 }

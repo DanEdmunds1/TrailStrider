@@ -13,7 +13,7 @@ export async function createHiker(request) {
 }
 
 export async function deleteHiker(id) {
-await axios.delete(`/api/hikers/${id}/`, {
+    await axios.delete(`/api/hikers/${id}/`, {
         validateStatus: () => true,
         headers: {
             Authorization: `Bearer ${getToken()}`

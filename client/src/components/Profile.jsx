@@ -7,12 +7,13 @@ import icon5 from '../assets/avatars/icon5.png'
 import icon6 from '../assets/avatars/icon6.png'
 import icon7 from '../assets/avatars/icon7.png'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { activeUser } from "../utils/helpers/common.js"
 import { deleteHiker } from '../utils/actions/hiker.js'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import CreateHiker from './CreateHiker.jsx'
 
 export default function Profile() {
     // Set Profile Pic to local storage AND state
@@ -21,6 +22,7 @@ export default function Profile() {
 
     const user = activeUser()
     const navigate = useNavigate()
+    
     function getUserImage() {
         return localStorage.getItem('profile-pic')
     }
@@ -39,6 +41,10 @@ export default function Profile() {
         icon6,
         icon7,
     ]
+
+    function selectHikerImg(img) {
+        console.log(img)
+    }
 
 
 
@@ -69,8 +75,18 @@ export default function Profile() {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
+    const [showOptions, setShowOptions] = useState(false)
+    const handleOptionsClose = () => setShowOptions(false)
+    const handleOptionShow = () => setShowOptions(true)
+
+    const [showHikerCreate, setShowHikerCreate] = useState(false)
+    const handleHikerCreateClose = () => setShowHikerCreate(false)
+    const handleHikerCreateShow = () => setShowHikerCreate(true)
+
+
     return (
         <>
+        <CreateHiker showHikerCreate={showHikerCreate} handleHikerCreateClose={handleHikerCreateClose} avatars={avatars} />
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -97,6 +113,34 @@ export default function Profile() {
                 </Modal.Footer>
             </Modal>
 
+            {/* <Modal
+                show={showOptions}
+                onHide={handleOptionsClose}
+                backdrop="static"
+                beyboard={false}>
+
+                <Modal.Header>
+                    <Modal.Title>Select Hiker Avatar</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><div>
+                    {avatars.map((img, idx) => {
+                        return (
+                            <img
+                                key={idx}
+                                src={img}
+                                alt={`Avatar Image ${idx + 1}`}
+                                className="avatar-img"
+                                onClick={() => selectHikerImg(img)} />
+                        )
+                    })}
+                </div></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={() => {
+                        handleOptionsClose()
+                    }}>Confirm</Button>
+                </Modal.Footer>
+            </Modal> */}
+
             {/* Use localsotrage setting and gettign to keep the profile picture */}
             <article className="profile-top">
                 <div className="user-zone">
@@ -104,15 +148,16 @@ export default function Profile() {
                     <button onClick={handleShow}>Change PFP</button>
                 </div>
                 <section className="hiker-display">
-                    <Link to="/hiker/create"><button>Create Hiker</button></Link>
+                    <button onClick={handleHikerCreateShow}>Create Hiker</button>
                     <div className="hiker-card-box">
                         {hikers.map((hiker) => (
                             user.user_id === hiker.owner ? (
                                 <>
                                     <div className="hiker-card">
+                                        <img src={hiker.picture} alt="hiker img" />
                                         <p key={hiker.id}>{hiker.name}</p>
                                         <p className="hiker-options" onClick={() => {
-                                            handleDelete(hiker.id)
+                                            handleOptionShow()
                                         }}>&#8942;</p>
                                     </div>
                                 </>
