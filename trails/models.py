@@ -9,11 +9,7 @@ class Trail(models.Model):
     description = models.CharField(max_length=2000)
     difficulty = models.FloatField(default=0)
     image = models.TextField(null=True, blank=True)
-    region = models.ForeignKey(
-        to='regions.Region',
-        on_delete=models.CASCADE,
-        related_name='trail_region'
-    )
+    region = models.CharField(max_length=100)
     owner = models.ForeignKey(
         to='users.User',
         on_delete=models.CASCADE,

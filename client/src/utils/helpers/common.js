@@ -7,11 +7,9 @@ export async function formToObj(request) {
 
 export function setToken(token) {
     localStorage.setItem(tokenName, token)
-    console.log(tokenName)
 }
 
 export function getToken() {
-    console.log(tokenName)
     return localStorage.getItem(tokenName)
 }
 
@@ -30,8 +28,7 @@ export function activeUser() {
     const exp = payload.exp
 
     if (exp > now) {
-        console.log(payload.sub)
-        return payload.sub
+        return payload
     } else {
         removeToken()
     }

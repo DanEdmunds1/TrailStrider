@@ -4,4 +4,3 @@ from regions.serializers.common import RegionSerializer
 
 class PopulatedTrailSerializer(TrailSerializer):
     reviews = ReviewSerializer(many=True)
-    region = RegionSerializer()

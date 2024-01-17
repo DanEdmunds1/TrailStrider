@@ -1,5 +1,3 @@
-// import axios from "axios"
-
 export async function trailLoader() {
     const res = await fetch(`/api/trails`)
     const trails = await res.json()
@@ -11,7 +9,7 @@ export async function trailLoader() {
 }
 
 export async function singleTrailLoader(trailId) {
-    const res = await fetch(`/api/trails/${trailId}`)
+    const res = await fetch(`/api/trails/${trailId}/`)
     const trail = await res.json()
 
     const res2 = await fetch('/api/hikers')

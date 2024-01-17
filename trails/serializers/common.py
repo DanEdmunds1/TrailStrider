@@ -1,7 +1,7 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from ..models import Trail
 
-class TrailSerializer(serializers.ModelSerializer):
+class TrailSerializer(ModelSerializer):
     class Meta:
         model = Trail
         fields = '__all__'

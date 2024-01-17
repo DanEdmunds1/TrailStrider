@@ -13,9 +13,9 @@ class Review(models.Model):
     owner = models.ForeignKey(
         to='users.User',
         on_delete=models.CASCADE,
-        related_name='reviews',
+        related_name='owned_reviews',
         null=True
     )
 
     def __str__(self):
-        return f" Review created at: {self.created_at}"
+        return f" Review by: {self.owner} for trail: {self.trail}"

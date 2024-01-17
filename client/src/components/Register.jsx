@@ -21,7 +21,6 @@ export default function Register() {
                 <input type="email" name="email" placeholder='Email' />
                 <input type="password" name="password" placeholder='Password' />
                 <input type="password" name="password_confirmation" placeholder='Confirm password' />
-                <input type="text" name="bio" placeholder='Bio' />
                 <button className='btn btn-pink' type="submit">Register</button>
                 {res && <p className='danger'>{res.data.message}</p>}
             </Form>

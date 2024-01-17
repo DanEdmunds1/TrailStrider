@@ -10,7 +10,6 @@ export default function NavBar() {
     const navigate = useNavigate()
     const user = activeUser()
     const token = getToken()
-    console.log('TOKEN: ',token)
     console.log('USER: ',user)
 
     function handleColorChange() {
