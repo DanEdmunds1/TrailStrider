@@ -1,14 +1,25 @@
 .avatar-img {
     height: 100px;
 
+    &.selected {
+        border: 1px solid black;
+    }
+
     &:hover {
         cursor: pointer;
         transform: scale(1.1);
-    };
-    a:active {
+    }
+
+    &:active {
         transform: scale(1.1);
-        border: 1px solid black
-      }
+        border: 1px solid black;
+    }
+}
+
+#pfp {
+    height: 200px;
+    width: 200px;
+    align-self: center;
 }
 
 .profile-top {
@@ -39,21 +50,28 @@
 
             .hiker-card {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 border: 1px solid blue;
                 padding: 5px;
                 width: 100px;
                 height: 100px;
                 margin: 10px;
+                .name-options {
+                    display: flex;
+                }
                 .hiker-options {
-                font-weight: 900;
-                font-size: 20px;
-                justify-self: flex-end;
-                &:hover {
-                    cursor: pointer;
+                    font-weight: 900;
+                    font-size: 20px;
+                    justify-self: flex-end;
+                    margin-left: 10px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
-                }
-            };
+            }
+
+            ;
 
         }
 
@@ -68,4 +86,12 @@
         text-align: left;
         padding: 10px 0 10px 10px;
     }
+}
+
+.empty {
+    background-color: red;
+}
+
+.valid {
+    background-color: goldenrod;
 }

@@ -8,16 +8,13 @@ import Home from './components/Home.jsx'
 import AllTrails from './components/AllTrails.jsx'
 import SingleTrail from './components/SingleTrail.jsx'
 import Profile from './components/Profile.jsx'
-import CreateTrail from './components/CreateTrail.jsx'
-import EditTrail from './components/EditTrail.jsx'
 import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
 import ReviewTrail from './components/ReviewTrail.jsx'
 // Loaders
 import { trailLoader, singleTrailLoader } from './utils/loaders/trail.js'
-import { createTrail, deleteTrail, editTrail } from './utils/actions/trail.js'
+import { createTrail, editTrail } from './utils/actions/trail.js'
 import { createHiker } from './utils/actions/hiker.js'
-import { getRegions } from './utils/loaders/regions.js'
 import { loginUser, registerUser } from './utils/actions/auth.js'
 import { getAllReviews } from './utils/loaders/reviews.js'
 import { createReview } from './utils/actions/review.js'
@@ -34,25 +31,14 @@ const router = createBrowserRouter([
       {
         path: '/trails',
         element: <AllTrails />,
-        loader: trailLoader
-      },
-      {
-        path: '/trails/create',
-        element: <CreateTrail />,
-        action: async ({ request }) => createTrail(request),
-        loader: getRegions
+        loader: trailLoader,
+        action: async ({ request }) => createTrail(request)
       },
       {
         path: '/trails/:trailId',
         element: <SingleTrail />,
         loader: async ({ params }) => singleTrailLoader(params.trailId),
-        action: async ({ params }) => deleteTrail(params.trailId)
-      },
-      {
-        path: '/trails/:trailId/edit',
-        element: <EditTrail />,
-        action: async ({ request, params }) => editTrail(request, params.trailId),
-        loader: async ({ params }) => singleTrailLoader(params.trailId)
+        action: async ({ request, params }) => editTrail(request, params.trailId)
       },
       {
         path: '/trails/:trailId/review',

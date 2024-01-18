@@ -3,14 +3,15 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import logoImage from '../assets/logo-img.png'
 import navProfileImage from '../assets/profile-link.png'
 import nightMode from '../assets/night-mode.png'
-import { removeToken, activeUser, getToken } from '../utils/helpers/common.js'
+import { removeToken, getToken } from '../utils/helpers/common.js'
+import { useState } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 export default function NavBar() {
 
     const navigate = useNavigate()
-    const user = activeUser()
     const token = getToken()
-    console.log('USER: ',user)
 
     function handleColorChange() {
         console.log("Changing Color")
@@ -21,8 +22,33 @@ export default function NavBar() {
         navigate('/')
     }
 
+    const [showLog, setShowLog] = useState(false)
+    const handleLogClose = () => setShowLog(false)
+    const handleLogShow = () => setShowLog(true)
+
     return (
         <>
+
+        <Modal
+         show={showLog}
+         onHide={handleLogClose}
+         backdrop="static"
+         keyboard={false}>
+            <Modal.Header>
+                <Modal.Title>Log Out Confirmation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Are you sure you want to Log Out?
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleLogClose}>Remain Logged In</Button>
+                <Button variant="danger" onClick={() => {
+                    handleLogClose()
+                    handleLogOut()
+                }}>Log Out</Button>
+            </Modal.Footer>
+        </Modal>
+
             <section className="navbar">
                 <section className="nav-left-box">
                     <Link to="/"><img className="logo-img" src={logoImage} /></Link>
@@ -30,7 +56,7 @@ export default function NavBar() {
                     {token ?
                     <>
                         <Link to="/profile"><img className="nav-profile-img" src={navProfileImage} /></Link>
-                        <button onClick={handleLogOut}>Log Out</button>
+                        <button onClick={handleLogShow}>Log Out</button>
                         </>
                         :
                         <>

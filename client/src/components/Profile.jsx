@@ -7,8 +7,8 @@ import icon5 from '../assets/avatars/icon5.png'
 import icon6 from '../assets/avatars/icon6.png'
 import icon7 from '../assets/avatars/icon7.png'
 
-import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { activeUser } from "../utils/helpers/common.js"
 import { deleteHiker } from '../utils/actions/hiker.js'
 import Modal from 'react-bootstrap/Modal'
@@ -22,7 +22,7 @@ export default function Profile() {
 
     const user = activeUser()
     const navigate = useNavigate()
-    
+
     function getUserImage() {
         return localStorage.getItem('profile-pic')
     }
@@ -42,15 +42,13 @@ export default function Profile() {
         icon7,
     ]
 
-    function selectHikerImg(img) {
-        console.log(img)
-    }
-
-
 
     const data = useLoaderData()
-    const { reviews, hikers } = data
-    console.log(hikers)
+    const { reviews, hikers, trails } = data
+
+    console.log(trails)
+
+
 
     async function handleDelete(id) {
         console.log("Delete")
@@ -68,25 +66,46 @@ export default function Profile() {
         }
     }
 
-
-
-
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
-    const [showOptions, setShowOptions] = useState(false)
-    const handleOptionsClose = () => setShowOptions(false)
-    const handleOptionShow = () => setShowOptions(true)
+    const [showOptions, setShowOptions] = useState(new Array(hikers.length).fill(false))
+
+    const toggleOptions = (index) => {
+        const newStates = [...showOptions]
+        newStates[index] = !newStates[index]
+        setShowOptions(newStates)
+    }
+
+    const optionsRef = useRef(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+                setShowOptions(new Array(hikers.length).fill(false))
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside)
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside)
+        }
+    }, [hikers.length])
+
+
 
     const [showHikerCreate, setShowHikerCreate] = useState(false)
     const handleHikerCreateClose = () => setShowHikerCreate(false)
     const handleHikerCreateShow = () => setShowHikerCreate(true)
 
+    const [showDelete, setShowDelete] = useState(false)
+    const handleDeleteClose = () => setShowDelete(false)
+    const handleDeleteShow = () => setShowDelete(true)
+
 
     return (
         <>
-        <CreateHiker showHikerCreate={showHikerCreate} handleHikerCreateClose={handleHikerCreateClose} avatars={avatars} />
+            <CreateHiker showHikerCreate={showHikerCreate} handleHikerCreateClose={handleHikerCreateClose} avatars={avatars} />
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -113,53 +132,53 @@ export default function Profile() {
                 </Modal.Footer>
             </Modal>
 
-            {/* <Modal
-                show={showOptions}
-                onHide={handleOptionsClose}
-                backdrop="static"
-                beyboard={false}>
-
-                <Modal.Header>
-                    <Modal.Title>Select Hiker Avatar</Modal.Title>
-                </Modal.Header>
-                <Modal.Body><div>
-                    {avatars.map((img, idx) => {
-                        return (
-                            <img
-                                key={idx}
-                                src={img}
-                                alt={`Avatar Image ${idx + 1}`}
-                                className="avatar-img"
-                                onClick={() => selectHikerImg(img)} />
-                        )
-                    })}
-                </div></Modal.Body>
-                <Modal.Footer>
-                    <Button variant="success" onClick={() => {
-                        handleOptionsClose()
-                    }}>Confirm</Button>
-                </Modal.Footer>
-            </Modal> */}
-
             {/* Use localsotrage setting and gettign to keep the profile picture */}
             <article className="profile-top">
                 <div className="user-zone">
-                    <img src={userImage} alt="Selected Image" className="avatar-img" />
+                    <img id="pfp" src={userImage} alt="Selected Image" className="avatar-img" />
                     <button onClick={handleShow}>Change PFP</button>
                 </div>
                 <section className="hiker-display">
                     <button onClick={handleHikerCreateShow}>Create Hiker</button>
                     <div className="hiker-card-box">
-                        {hikers.map((hiker) => (
+                        {hikers.map((hiker, index) => (
                             user.user_id === hiker.owner ? (
                                 <>
-                                    <div className="hiker-card">
+                                    <div className="hiker-card" ref={optionsRef}>
                                         <img src={hiker.picture} alt="hiker img" />
-                                        <p key={hiker.id}>{hiker.name}</p>
+                                        <div className="name-options">
+                                            <p key={hiker.id}>{hiker.name}</p>
                                         <p className="hiker-options" onClick={() => {
-                                            handleOptionShow()
+                                            toggleOptions(index)
                                         }}>&#8942;</p>
+                                        {showOptions[index] && (
+                                            <div className="hiker-options">
+                                                <p onClick={handleDeleteShow}>Delete</p>
+                                            </div>
+                                        )}
+                                        </div>
+                                        
                                     </div>
+                                    {/* Below creates a separate deletion confirmation modal for each individual hiker so it has access to the hiker id for deletion */}
+                                    <Modal
+                                        show={showDelete}
+                                        onHide={handleDeleteClose}
+                                        backdrop="static"
+                                        beyboard={false}>
+                                        <Modal.Header>
+                                            <Modal.Title>Deletion Confirmation</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            Are you sure you want to Delete {hiker.name}?
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleDeleteClose}>Cancel</Button>
+                                            <Button variant="danger" onClick={() => {
+                                                handleDeleteClose()
+                                                handleDelete(hiker.id)
+                                            }}>Delete</Button>
+                                        </Modal.Footer>
+                                    </Modal>
                                 </>
                             ) : (
                                 null
@@ -172,17 +191,20 @@ export default function Profile() {
             <section className="profile-reviews-box">
                 <h3>Trails Reviewed</h3>
                 <div className="profile-reviews">
-                    {reviews.map(review => {
-                        return (
-                            <>
-                                {user.user_id === review.owner ?
-                                    <p key={review.id}>Trail: {review.trail} - {review.text}</p>
-                                    :
-                                    <></>
-                                }
-                            </>
-                        )
-                    })}
+                    {reviews
+                        .filter(review => user.user_id === review.owner)
+                        .map(review => {
+                            const matchingTrail = trails.find(trail => trail.id === review.trail)
+                            return (
+                                <div key={review.id}>
+                                    {matchingTrail && (
+                                        <>
+                                            <p>{matchingTrail.name}: {review.text}</p>
+                                        </>
+                                    )}
+                                </div>
+                            )
+                        })}
                 </div>
             </section>
         </>

@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from "react-router-dom"
 import Filters from './Filters'
 import { useState, useEffect } from "react"
+import CreateTrail from "./CreateTrail"
 
 export default function AllTrails() {
     const loadedData = useLoaderData()
@@ -30,13 +31,21 @@ export default function AllTrails() {
         setSearchTrails(trails)
     }, [trails])
 
-
+    
+    const [showCreate, setShowCreate] = useState(false)
+    const handleCreateClose = () => setShowCreate(false)
+    const handleCreateShow = () => setShowCreate(true)
 
 
     return (
         <>
+
+        <CreateTrail showCreate={showCreate} handleCreateClose={handleCreateClose} />
+
+
+
             <h1>ALL TRAILS</h1>
-            <Link to="/trails/create"><button>Create Trail</button></Link>
+            <button onClick={handleCreateShow}>Create Trail</button>
             <Filters searchTrails={searchTrails} setFilteredSearchTrails={setFilteredSearchTrails} filteredSearchTrails={filteredSearchTrails} />
             <section className="trail-card-container">
                 {filteredSearchTrails.map(trail => {

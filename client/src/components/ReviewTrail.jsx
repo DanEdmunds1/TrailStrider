@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { Form, useActionData, useLoaderData, useNavigate } from "react-router-dom"
+import Modal from 'react-bootstrap/Modal'
 
-
-export default function ReviewTrail() {
+// eslint-disable-next-line react/prop-types
+export default function ReviewTrail({ showReview, handleReviewClose }) {
     const res = useActionData()
     const data = useLoaderData()
     const { trail } = data
@@ -13,30 +14,39 @@ export default function ReviewTrail() {
         console.log(res)
         if (res?.status === 201) {
             console.log('REVIEW SUCCESSFULLY POSTED')
-            navigate(`/trails/${trail.id}/`)
+            // handleReviewClose()
+            navigate(`/trails/${trail.id}`)
         }
     }, [res, navigate, trail.id])
 
 
+
     return (
         <>
-            <h1 className="text-center bold display-3 mb-4">Create Review</h1>
-            <Form className='form' method="POST">
-                <label hidden htmlFor="text">Text</label>
-                <textarea name="text" placeholder='Text'></textarea>
+            {/* <Modal
+                show={showReview}
+                onHide={handleReviewClose}
+                backdrop="static"
+                keyboard={false}>
+                <Modal.Header closeButton>
+                    Trail Review
+                </Modal.Header>
+                <Modal.Body> */}
+                    <Form className='form' method="POST">
+                        <label hidden htmlFor="text">Text</label>
+                        <textarea name="text" placeholder='Text'></textarea>
+
+                        <label hidden htmlFor="trail">Trail</label>
+                        <input type="text" name="trail" value={trail.id} readOnly />
+
+                        {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
 
 
-                <label hidden htmlFor="trail">Trail</label>
-                <input type="text" name="trail" value={trail.id} readOnly />
+                        <button className="btn btn-pink" type="submit">Post Review</button>
+                    </Form>
+                {/* </Modal.Body>
+            </Modal> */}
 
-
-
-
-                {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
-
-
-                <button className="btn btn-pink" type="submit">Post Review</button>
-            </Form>
         </>
     )
 }

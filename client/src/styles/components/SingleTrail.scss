@@ -1,9 +1,91 @@
 .single-trail-image {
     height: 300px;
-    width: 300px
+    width: 100%;
 }
 
 .single-container {
     display: flex;
     flex-direction: row;
+}
+
+.trail-single-buttons {
+    background-color: green;
+    border-radius: 5px;
+    box-shadow: 5px 5px black;
+    width: 100px;
+    color: white;
+    margin: 0 10px 0 10px;
+
+
+    &:hover {
+        transform: scale(1.2);
+        box-shadow: none;
+        transform: translate(5px, 5px);
+    }
+}
+
+.hikers-reviews-side {
+    border: 1px solid blue;
+
+    h3 {
+        margin: 10px 0 0 0;
+    }
+
+    .hiker-box {
+        // border: 1px solid green;
+        margin: 20px 0 10px 0;
+
+        .hiker-container {
+            display: flex;
+            align-items: center;
+            margin: 5px 0 5px 0;
+            .single-view-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            p {
+                font-family: 'Noto Sans', sans-serif;
+                margin-left: 10px;
+
+                .hiker-name {
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+}
+
+.reviews-section {
+    margin: 20px 0 0 10px;
+    border: 1px solid black;
+    .reviews-header {
+        display: flex;
+        .add-review {
+            margin: 0 0 0 10px;
+        }
+    }
+    .review {
+        display: flex;
+        flex-direction: row;
+        .review-options {
+            margin-left: 10px;
+            font-weight: bold;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+}
+
+.options-dropdown {
+    p {
+        margin-left: 10px;
+        color: red;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
