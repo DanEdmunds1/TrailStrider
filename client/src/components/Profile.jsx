@@ -8,12 +8,13 @@ import icon6 from '../assets/avatars/icon6.png'
 import icon7 from '../assets/avatars/icon7.png'
 
 import { useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { activeUser } from "../utils/helpers/common.js"
 import { deleteHiker } from '../utils/actions/hiker.js'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import CreateHiker from './CreateHiker.jsx'
+import TimeStamp from './TimeStamp.jsx'
 
 export default function Profile() {
     // Set Profile Pic to local storage AND state
@@ -46,7 +47,8 @@ export default function Profile() {
     const data = useLoaderData()
     const { reviews, hikers, trails } = data
 
-    console.log(trails)
+    console.log(reviews)
+    console.log(user.user_id)
 
 
 
@@ -148,16 +150,16 @@ export default function Profile() {
                                         <img src={hiker.picture} alt="hiker img" />
                                         <div className="name-options">
                                             <p key={hiker.id}>{hiker.name}</p>
-                                        <p className="hiker-options" onClick={() => {
-                                            toggleOptions(index)
-                                        }}>&#8942;</p>
-                                        {showOptions[index] && (
-                                            <div className="hiker-options">
-                                                <p onClick={handleDeleteShow}>Delete</p>
-                                            </div>
-                                        )}
+                                            <p className="hiker-options" onClick={() => {
+                                                toggleOptions(index)
+                                            }}>&#8942;</p>
+                                            {showOptions[index] && (
+                                                <div className="hiker-options">
+                                                    <p onClick={handleDeleteShow}>Delete</p>
+                                                </div>
+                                            )}
                                         </div>
-                                        
+
                                     </div>
                                     {/* Below creates a separate deletion confirmation modal for each individual hiker so it has access to the hiker id for deletion */}
                                     <Modal
@@ -192,19 +194,27 @@ export default function Profile() {
                 <h3>Trails Reviewed</h3>
                 <div className="profile-reviews">
                     {reviews
-                        .filter(review => user.user_id === review.owner)
+                        .filter(review => user.user_id === review.owner.id)
                         .map(review => {
-                            const matchingTrail = trails.find(trail => trail.id === review.trail)
-                            return (
-                                <div key={review.id}>
-                                    {matchingTrail && (
-                                        <>
-                                            <p>{matchingTrail.name}: {review.text}</p>
-                                        </>
-                                    )}
-                                </div>
-                            )
+                            const matchingTrail = trails.find(trail => trail.id === review.trail.id);
+
+                            if (matchingTrail) {
+                                return (
+                                 
+                                        <div key={review.id} className="profile-review">
+                                            <p className="profile-review-text"><Link to={`/trails/${review.trail.id}`}>{review.trail.name}</Link>- {review.text}</p>
+                                            <TimeStamp timestamp={review.created_at} />
+                                        </div>
+                                  
+                                );
+                            }
+
+                            return null;
                         })}
+
+
+
+
                 </div>
             </section>
         </>

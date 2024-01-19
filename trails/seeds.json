@@ -1,0 +1,197 @@
+[
+{
+  "model": "trails.trail",
+  "pk": 1,
+  "fields": {
+    "name": "Trail 1",
+    "length": 3.0,
+    "elevation": 4.0,
+    "descent": 5.0,
+    "description": "yes",
+    "difficulty": 0.0,
+    "image": "image",
+    "region": "Yellowstone",
+    "owner": 1
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 2,
+  "fields": {
+    "name": "Trail 2 Name",
+    "length": 6.0,
+    "elevation": 5.0,
+    "descent": 6.0,
+    "description": "The second one",
+    "difficulty": 1.0,
+    "image": "Image goes here",
+    "region": "Somewhere",
+    "owner": 1
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 3,
+  "fields": {
+    "name": "A third trail",
+    "length": 7.0,
+    "elevation": 6.0,
+    "descent": 6.0,
+    "description": "ball",
+    "difficulty": 0.0,
+    "image": "Image",
+    "region": "Somehwere also",
+    "owner": 2
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 4,
+  "fields": {
+    "name": "Bambo Pran",
+    "length": 8.0,
+    "elevation": 8.0,
+    "descent": 8.0,
+    "description": "Goo",
+    "difficulty": 0.0,
+    "image": "Image",
+    "region": "London",
+    "owner": 3
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 5,
+  "fields": {
+    "name": "Trail Of FUN",
+    "length": 7.0,
+    "elevation": 7.0,
+    "descent": 7.0,
+    "description": "Trail",
+    "difficulty": 0.0,
+    "image": "image",
+    "region": "Place",
+    "owner": 3
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 6,
+  "fields": {
+    "name": "Goof Trail",
+    "length": 9.0,
+    "elevation": 9.0,
+    "descent": 9.0,
+    "description": "i",
+    "difficulty": 0.0,
+    "image": "i",
+    "region": "i",
+    "owner": 3
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 9,
+  "fields": {
+    "name": "Crunchy",
+    "length": 6.0,
+    "elevation": 5.0,
+    "descent": 5.0,
+    "description": "Not YETTT",
+    "difficulty": 0.0,
+    "image": "https://images.pexels.com/photos/1578750/pexels-photo-1578750.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "region": "Gegion",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 10,
+  "fields": {
+    "name": "Crango",
+    "length": 5.0,
+    "elevation": 5.0,
+    "descent": 5.0,
+    "description": "Image Test",
+    "difficulty": 0.0,
+    "image": "carl.jpg",
+    "region": "Ball Nevada",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 11,
+  "fields": {
+    "name": "Bambo",
+    "length": 7.0,
+    "elevation": 7.0,
+    "descent": 7.0,
+    "description": "YES",
+    "difficulty": 0.0,
+    "image": "carl.jpg",
+    "region": "A place",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 12,
+  "fields": {
+    "name": "ssss",
+    "length": 5.0,
+    "elevation": 5.0,
+    "descent": 5.0,
+    "description": "rr",
+    "difficulty": 0.0,
+    "image": "icon3.png",
+    "region": "place",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 13,
+  "fields": {
+    "name": "Another",
+    "length": 8.0,
+    "elevation": 8.0,
+    "descent": 8.0,
+    "description": "Good",
+    "difficulty": 0.0,
+    "image": "https://res.cloudinary.com/dnpbbx7kb/image/upload/v1705597914/trailstrider/vcmz5lylu56nlswxuwwh.png",
+    "region": "Palce",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 14,
+  "fields": {
+    "name": "place",
+    "length": 8.0,
+    "elevation": 8.0,
+    "descent": 8.0,
+    "description": "Good",
+    "difficulty": 0.0,
+    "image": "",
+    "region": "Place",
+    "owner": 4
+  }
+},
+{
+  "model": "trails.trail",
+  "pk": 15,
+  "fields": {
+    "name": "place",
+    "length": 7.0,
+    "elevation": 7.0,
+    "descent": 7.0,
+    "description": "Yes",
+    "difficulty": 0.0,
+    "image": "https://res.cloudinary.com/dnpbbx7kb/image/upload/v1705597950/trailstrider/daau2h4rlclgyyl8kq8h.jpg",
+    "region": "mmmm",
+    "owner": 4
+  }
+}
+]

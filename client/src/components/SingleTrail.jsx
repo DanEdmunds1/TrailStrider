@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import StarRating from "./StarRating.jsx"
 import ReviewTrail from "./ReviewTrail.jsx"
+import TimeStamp from "./TimeStamp.jsx"
 
 export default function SingleTrail() {
 
@@ -49,6 +50,8 @@ export default function SingleTrail() {
         }
     }
 
+    console.log(trail.reviews)
+
 
 
 
@@ -83,6 +86,7 @@ export default function SingleTrail() {
 
             <Container fluid>
                 <Row className="single-container">
+                    <div className="single-top">
                     <Col className="trail-info" xs={12} md={6} lg={4}>
                         <h1>{trail.name}</h1>
                         <section className="trail-data">
@@ -99,9 +103,9 @@ export default function SingleTrail() {
                             <img className="single-trail-image" src={trail.image} alt="Trail Image" />
                             <StarRating />
                             <div className="trail-detail-box">
-                                <div>Distance: {trail.length}km</div>
-                                <div>Elevation: {trail.elevation}m</div>
-                                <div>Descent: {trail.descent}m</div>
+                                <div><span className="title">Distance:</span> {trail.length}km</div>
+                                <div><span className="title">Elevation:</span> {trail.elevation}m</div>
+                                <div><span className="title">Descent:</span> {trail.descent}m</div>
                             </div>
                         </section>
 
@@ -128,8 +132,8 @@ export default function SingleTrail() {
                                 return null
                             })}
                         </div>
-
                     </Col>
+                    </div>
                 </Row>
                 <Row>
                     <section className="reviews-section">
@@ -138,9 +142,13 @@ export default function SingleTrail() {
                         {/* <button onClick={handleReviewShow}>Add Review</button> */}
                         <Link className="add-review" to={`/trails/${trail.id}/review`}>Add Review</Link>
                         </div>
+                        <section className="review-box">
                         {trail.reviews.map((review, index) => (
                         <div key={review.id} className="review">
-                            <p>{review.text}</p>
+                            <div className="review-letters">
+                            <p className="review-text">{review.text}</p>
+                            <TimeStamp timestamp={review.created_at} />
+                            </div>
                             {user.user_id === review.owner && (
                                 <>
                                     <div
@@ -161,6 +169,7 @@ export default function SingleTrail() {
                             )}
                         </div>
                     ))}
+                    </section>
                 </section>
             </Row>
             </Container>

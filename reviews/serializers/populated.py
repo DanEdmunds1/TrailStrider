@@ -3,5 +3,5 @@ from trails.serializers.common import TrailSerializer
 from users.serializers.common import UserSerializer
 
 class PopulatedReviewSerializer(ReviewSerializer):
-    owner = UserSerializer
-    trail = TrailSerializer
+    owner = UserSerializer()
+    trail = TrailSerializer()

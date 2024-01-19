@@ -85,6 +85,29 @@
         border: 2px solid rgb(211, 9, 9);
         text-align: left;
         padding: 10px 0 10px 10px;
+        overflow-y: auto;
+        height: 30vh;
+        .profile-review {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            .profile-review-text {
+                margin: 0;
+                font-family: 'Merriweather', serif;
+                a {
+                    text-decoration: none;
+                    color: black;
+                    &:hover {
+                        color: green
+                    }
+                }
+            }
+            span {
+                color: grey;
+                font-size: small;
+                font-family: 'Courier New', Courier, monospace;
+            }
+        }
     }
 }
 

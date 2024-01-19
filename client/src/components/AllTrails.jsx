@@ -7,8 +7,8 @@ export default function AllTrails() {
     const loadedData = useLoaderData()
     const { trails, hikers } = loadedData
 
-    const hiker = hikers[0]
-    let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
+    // const hiker = hikers[0]
+    // let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
 
     
 
@@ -39,19 +39,16 @@ export default function AllTrails() {
 
     return (
         <>
-
         <CreateTrail showCreate={showCreate} handleCreateClose={handleCreateClose} />
 
-
-
             <h1>ALL TRAILS</h1>
-            <button onClick={handleCreateShow}>Create Trail</button>
+            <button className="trail-single-buttons" onClick={handleCreateShow}>Create Trail</button>
             <Filters searchTrails={searchTrails} setFilteredSearchTrails={setFilteredSearchTrails} filteredSearchTrails={filteredSearchTrails} />
             <section className="trail-card-container">
                 {filteredSearchTrails.map(trail => {
                     console.log(trail)
-                    let steps = Math.ceil((trail.length * 100000) / stride)
-                    let duration = (trail.length / (Number(hiker.ability) * 1.609))
+                    // let steps = Math.ceil((trail.length * 100000) / stride)
+                    let duration = (trail.length / (3 * 1.609))
 
                     let totalMinutes = Math.floor(duration * 60)
                     let hours = Math.floor(totalMinutes / 60)
@@ -59,9 +56,15 @@ export default function AllTrails() {
                     return (
                         <Link key={trail.id} to={`/trails/${trail.id}`}>
                             <section key={trail.id} className="trail-card">
-                                <img src="" alt={`${trail.name} Image`} />
+                                <div className="image-box">
+                                <img src={trail.image} alt={`${trail.name} Image`} />
+                                </div>
                                 <div className="trail-card-text-box">
-                                    {trail.name} - {trail.length}km - {steps} steps - {hours}hrs {minutes}mins
+                                    <h5> {trail.name}</h5>
+                                    <p className="length">{trail.region}</p>
+                                    <p className="length">Distance: {trail.length}km</p>
+                                    <p className="stats">Average Walk Time: {hours}hrs {minutes}mins</p>
+                                    
                                 </div>
                             </section>
                         </Link>

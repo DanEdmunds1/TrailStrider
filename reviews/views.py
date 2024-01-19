@@ -9,7 +9,7 @@ from lib.permissions import IsOwnerOrReadOnly
 # Methods: GET, POST
 class ReviewCreateView(OwnerListCreateView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+    # serializer_class = ReviewSerializer
 
     def get_serializer_class(self):
         print('self request method -->', self.request.method)
