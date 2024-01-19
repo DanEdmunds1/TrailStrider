@@ -18,7 +18,7 @@ export default function SingleTrail() {
 
     const user = activeUser()
     const loadedData = useLoaderData()
-    const { trail, hikers } = loadedData
+    const { trail, hikers, reviews } = loadedData
     const navigate = useNavigate()
 
 
@@ -50,7 +50,18 @@ export default function SingleTrail() {
         }
     }
 
-    console.log(trail.reviews)
+
+    console.log(reviews)
+
+    const reviewsForHere = reviews.filter(review => {
+        if (review.trail.id === trail.id) {
+            return review
+        }
+    })
+
+    console.log(reviewsForHere)
+
+
 
 
 
@@ -87,91 +98,94 @@ export default function SingleTrail() {
             <Container fluid>
                 <Row className="single-container">
                     <div className="single-top">
-                    <Col className="trail-info" xs={12} md={6} lg={4}>
-                        <h1>{trail.name}</h1>
-                        <section className="trail-data">
-                            {user.user_id === trail.owner ?
-                                <>
-                                    <button className="trail-single-buttons" onClick={() => handleDeleteShow()}>Delete Trail</button>
-                                    <button className="trail-single-buttons" onClick={handleEditShow}>Edit Trail</button>
-                                </>
-                                :
-                                <></>
-                            }
-
-                            <h2>{trail.region.name}</h2>
-                            <img className="single-trail-image" src={trail.image} alt="Trail Image" />
-                            <StarRating />
-                            <div className="trail-detail-box">
-                                <div><span className="title">Distance:</span> {trail.length}km</div>
-                                <div><span className="title">Elevation:</span> {trail.elevation}m</div>
-                                <div><span className="title">Descent:</span> {trail.descent}m</div>
-                            </div>
-                        </section>
-
-                    </Col>
-                    <Col className="hikers-reviews-side" xs={12} md={6} lg={8}>
-                        <h3>Your Hikers</h3>
-                        <div className="hiker-box">
-                            {hikers.map(hiker => {
-                                if (user.user_id === hiker.owner) {
-                                    let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
-                                    let steps = Math.ceil((trail.length * 100000) / stride)
-                                    let duration = (trail.length / (Number(hiker.ability) * 1.609))
-                                    let totalMinutes = Math.floor(duration * 60)
-                                    let hours = Math.floor(totalMinutes / 60)
-                                    let minutes = (totalMinutes % 60)
-
-                                    return (
-                                        <div key={hiker.id} className="hiker-container">
-                                            <img className="single-view-avatar" src={hiker.picture} alt="hiker image" />
-                                            <p><span className="hiker-name">{hiker.name}</span>: {steps} steps : {hours}hrs {minutes}mins</p>
-                                        </div>
-                                    )
+                        <Col className="trail-info" xs={12} md={6} lg={4}>
+                            <h1>{trail.name}</h1>
+                            <section className="trail-data">
+                                {user.user_id === trail.owner ?
+                                    <>
+                                        <button className="trail-single-buttons" onClick={() => handleDeleteShow()}>Delete Trail</button>
+                                        <button className="trail-single-buttons" onClick={handleEditShow}>Edit Trail</button>
+                                    </>
+                                    :
+                                    <></>
                                 }
-                                return null
-                            })}
-                        </div>
-                    </Col>
+
+                                <h2>{trail.region.name}</h2>
+                                <img className="single-trail-image" src={trail.image} alt="Trail Image" />
+                                <StarRating />
+                                <div className="trail-detail-box">
+                                    <div><span className="title">Distance:</span> {trail.length}km</div>
+                                    <div><span className="title">Elevation:</span> {trail.elevation}m</div>
+                                    <div><span className="title">Descent:</span> {trail.descent}m</div>
+                                </div>
+                            </section>
+
+                        </Col>
+                        <Col className="hikers-reviews-side" xs={12} md={6} lg={8}>
+                            <h3>Your Hikers</h3>
+                            <div className="hiker-box">
+                                {hikers.map(hiker => {
+                                    if (user.user_id === hiker.owner) {
+                                        let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
+                                        let steps = Math.ceil((trail.length * 100000) / stride)
+                                        let duration = (trail.length / (Number(hiker.ability) * 1.609))
+                                        let totalMinutes = Math.floor(duration * 60)
+                                        let hours = Math.floor(totalMinutes / 60)
+                                        let minutes = (totalMinutes % 60)
+
+                                        return (
+                                            <div key={hiker.id} className="hiker-container">
+                                                <img className="single-view-avatar" src={hiker.picture} alt="hiker image" />
+                                                <p><span className="hiker-name">{hiker.name}</span>: {steps} steps : {hours}hrs {minutes}mins</p>
+                                            </div>
+                                        )
+                                    }
+                                    return null
+                                })}
+                            </div>
+                        </Col>
                     </div>
                 </Row>
                 <Row>
                     <section className="reviews-section">
                         <div className="reviews-header">
-                        <h4>REVIEWS</h4>
-                        {/* <button onClick={handleReviewShow}>Add Review</button> */}
-                        <Link className="add-review" to={`/trails/${trail.id}/review`}>Add Review</Link>
+                            <h4>REVIEWS</h4>
+                            {/* <button onClick={handleReviewShow}>Add Review</button> */}
+                            <Link className="add-review" to={`/trails/${trail.id}/review`}>Add Review</Link>
                         </div>
                         <section className="review-box">
-                        {trail.reviews.map((review, index) => (
-                        <div key={review.id} className="review">
-                            <div className="review-letters">
-                            <p className="review-text">{review.text}</p>
-                            <TimeStamp timestamp={review.created_at} />
-                            </div>
-                            {user.user_id === review.owner && (
-                                <>
-                                    <div
-                                        className="review-options"
-                                        onClick={() => toggleOptions(index)}
-                                    >
-                                        &#8942;
-                                    </div>
-                                    {showOptions === index && (
-                                        <div className="options-dropdown">
-                                            <p onClick={() => handleReviewDelete(review.id)}>
-                                                Delete
-                                            </p>
-                                            {/* Add more options as needed */}
+                            {reviewsForHere.map((review, index) => (
+                                <div key={review.id} className="review">
+                                    <div className="review-letters">
+                                        <p className="review-text">{review.text}</p>
+                                        <div className="timestamp-container">
+                                            <p>by {review.owner.username} at </p>
+                                            <TimeStamp timestamp={review.created_at} />
                                         </div>
+                                    </div>
+                                    {user.user_id === review.owner.id && (
+                                        <>
+                                            <div
+                                                className="review-options"
+                                                onClick={() => toggleOptions(index)}
+                                            >
+                                                &#8942;
+                                            </div>
+                                            {showOptions === index && (
+                                                <div className="options-dropdown">
+                                                    <p onClick={() => handleReviewDelete(review.id)}>
+                                                        Delete
+                                                    </p>
+                                                    {/* Add more options as needed */}
+                                                </div>
+                                            )}
+                                        </>
                                     )}
-                                </>
-                            )}
-                        </div>
-                    ))}
+                                </div>
+                            ))}
+                        </section>
                     </section>
-                </section>
-            </Row>
+                </Row>
             </Container>
 
             <Modal

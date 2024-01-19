@@ -56,12 +56,12 @@ export default function NavBar() {
                     {token ?
                     <>
                         <Link to="/profile"><img className="nav-profile-img" src={navProfileImage} /></Link>
-                        <button onClick={handleLogShow}>Log Out</button>
+                        <button className="log-out-button" onClick={handleLogShow}>Log Out</button>
                         </>
                         :
                         <>
-                            <Link to="/register">Register</Link>
-                            <Link to="/login">Login</Link>
+                            <Link className="logreg" to="/register">Register</Link>
+                            <Link className="logreg" to="/login">Login</Link>
                         </>
                     }
 
@@ -70,7 +70,7 @@ export default function NavBar() {
                 </section>
                 <img className="color-scheme-toggle" src={nightMode} onClick={handleColorChange} />
                 <Dropdown>
-                    <Dropdown.Toggle variant="danger">Navigate</Dropdown.Toggle>
+                    <Dropdown.Toggle variant="secondary">Navigate</Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item><Link to='/'>Home</Link></Dropdown.Item>
                         <Dropdown.Item><Link to='/trails'>Trails</Link></Dropdown.Item>

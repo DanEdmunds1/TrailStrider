@@ -12,7 +12,7 @@ a {
 .trail-card {
     width: 250px;
     height: 300px;
-    margin: 20px 0 0 0;
+    margin: 30px 0 20px 0;
     border-radius: 5px;
     flex-direction: column;
 
@@ -34,11 +34,12 @@ a {
         background: url("/home/dan/development/PROJECTS/TrailStrider/client/src/assets/card-background.png");
         background-repeat: no-repeat;
         background-size: 60px;
-        background-position: 1% 10%;
+        background-position: 1% 45%;
        
 
         h5 {
             padding-top: 5px;
+            text-align: center;
         }
         .length {
             text-align: center;

@@ -18,6 +18,7 @@ export default function Filters({ searchTrails, setFilteredSearchTrails }) {
     setFilters(newObj)
   }
 
+
   useEffect(() => {
     const pattern = new RegExp(filters.search, 'i')
     // eslint-disable-next-line react/prop-types
@@ -36,13 +37,6 @@ export default function Filters({ searchTrails, setFilteredSearchTrails }) {
         break
       case 'hardestToEasiest':
         sortedArray = filteredArray.sort((a, b) => b.difficulty - a.difficulty)
-        break
-      case 'mostReviewed':
-        sortedArray = filteredArray.sort((a, b) => {
-          const reviewsA = a.reviews ? a.reviews.length : 0
-          const reviewsB = b.reviews ? b.reviews.length : 0
-          return reviewsB - reviewsA
-        })
         break
       default:
         sortedArray = filteredArray;
@@ -67,12 +61,11 @@ export default function Filters({ searchTrails, setFilteredSearchTrails }) {
     <>
       <input className="searchbar" name="search" placeholder="Search..." value={filters.search} onChange={handleChange} />
       <select className="dropdown" name="sortBy" value={filters.sortBy} onChange={handleChange}>
-        <option value=''>Display by...</option>
+        <option value=''>Display by...All</option>
         <option value='easiestToHardest'>Difficulty (easiest)</option>
         <option value='hardestToEasiest'>Difficulty (hardest)</option>
         <option value='shortestToLongest'>Distance (shortest)</option>
         <option value='longestToShortest'>Distance (longest)</option>
-        <option value='mostReviewed'>Most Reviewed</option>
       </select>
     </>
   )
