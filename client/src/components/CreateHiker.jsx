@@ -10,7 +10,6 @@ export default function CreateHiker({ showHikerCreate, handleHikerCreateClose, a
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(res)
         if (res?.status === 201) {
             console.log('HIKER CREATED SUCCESSFULLY')
             navigate(`/profile`)

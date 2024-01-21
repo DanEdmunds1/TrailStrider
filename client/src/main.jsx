@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './styles/main.scss'
+
 
 // Components
 import App from './App.jsx'
@@ -18,6 +18,7 @@ import { createHiker } from './utils/actions/hiker.js'
 import { loginUser, registerUser } from './utils/actions/auth.js'
 import { getAllReviews } from './utils/loaders/reviews.js'
 import { createReview } from './utils/actions/review.js'
+
 
 const router = createBrowserRouter([
   {

@@ -8,14 +8,11 @@ import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
-export default function NavBar() {
+// eslint-disable-next-line react/prop-types
+export default function NavBar({ toggleStyle }) {
 
     const navigate = useNavigate()
     const token = getToken()
-
-    function handleColorChange() {
-        console.log("Changing Color")
-    }
 
     function handleLogOut() {
         removeToken()
@@ -25,6 +22,7 @@ export default function NavBar() {
     const [showLog, setShowLog] = useState(false)
     const handleLogClose = () => setShowLog(false)
     const handleLogShow = () => setShowLog(true)
+
 
     return (
         <>
@@ -68,7 +66,7 @@ export default function NavBar() {
 
 
                 </section>
-                <img className="color-scheme-toggle" src={nightMode} onClick={handleColorChange} />
+                <img className="color-scheme-toggle" src={nightMode} onClick={toggleStyle} />
                 <Dropdown>
                     <Dropdown.Toggle variant="secondary">Navigate</Dropdown.Toggle>
                     <Dropdown.Menu>

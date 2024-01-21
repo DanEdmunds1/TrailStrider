@@ -47,13 +47,10 @@ export default function Profile() {
     const data = useLoaderData()
     const { reviews, hikers, trails } = data
 
-    console.log(reviews)
-    console.log(user.user_id)
-
 
 
     async function handleDelete(id) {
-        console.log("Delete")
+        console.log('ID -->', id)
         try {
             const res = await deleteHiker(id)
             console.log(res)
@@ -61,7 +58,7 @@ export default function Profile() {
                 navigate('/profile')
                 console.log('deleted')
             } else {
-                console.log('Failedf to Delete')
+                console.log('Failed to Delete')
             }
         } catch (error) {
             console.log(error)
@@ -72,20 +69,24 @@ export default function Profile() {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
-    const [showOptions, setShowOptions] = useState(new Array(hikers.length).fill(false))
 
-    const toggleOptions = (index) => {
-        const newStates = [...showOptions]
-        newStates[index] = !newStates[index]
-        setShowOptions(newStates)
-    }
+    const [deleteStates, setDeleteStates] = useState(hikers.map(() => false));
+
+
+    const handleDeleteShow = (index) => {
+        setDeleteStates((prevStates) => {
+            const newStates = [...prevStates];
+            newStates[index] = !newStates[index];
+            return newStates;
+        });
+    };
 
     const optionsRef = useRef(null)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (optionsRef.current && !optionsRef.current.contains(event.target)) {
-                setShowOptions(new Array(hikers.length).fill(false))
+                setDeleteStates(new Array(hikers.length).fill(false))
             }
         }
         document.body.addEventListener('click', handleClickOutside)
@@ -94,16 +95,9 @@ export default function Profile() {
         }
     }, [hikers.length])
 
-
-
     const [showHikerCreate, setShowHikerCreate] = useState(false)
     const handleHikerCreateClose = () => setShowHikerCreate(false)
     const handleHikerCreateShow = () => setShowHikerCreate(true)
-
-    const [showDelete, setShowDelete] = useState(false)
-    const handleDeleteClose = () => setShowDelete(false)
-    const handleDeleteShow = () => setShowDelete(true)
-
 
     return (
         <>
@@ -112,7 +106,7 @@ export default function Profile() {
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
-                beyboard={false}>
+                keyboard={false}>
 
                 <Modal.Header>
                     <Modal.Title>Select Avatar</Modal.Title>
@@ -138,7 +132,7 @@ export default function Profile() {
             <article className="profile-top">
                 <div className="user-zone">
                     <img id="pfp" src={userImage} alt="Selected Image" className="avatar-img" />
-                    <button onClick={handleShow}>Change PFP</button>
+                    <button onClick={handleShow}>Select Profile Picture</button>
                 </div>
                 <section className="hiker-display">
                     <button onClick={handleHikerCreateShow}>Create Hiker</button>
@@ -146,27 +140,29 @@ export default function Profile() {
                         {hikers.map((hiker, index) => (
                             user.user_id === hiker.owner ? (
                                 <>
-                                    <div className="hiker-card" ref={optionsRef}>
+                                    <div className="hiker-card" ref={optionsRef} key={index}>
                                         <img src={hiker.picture} alt="hiker img" />
                                         <div className="name-options">
                                             <p key={hiker.id}>{hiker.name}</p>
                                             <p className="hiker-options" onClick={() => {
-                                                toggleOptions(index)
+                                               handleDeleteShow(index)
                                             }}>&#8942;</p>
-                                            {showOptions[index] && (
+                                            {deleteStates[index] && (
                                                 <div className="hiker-options">
-                                                    <p onClick={handleDeleteShow}>Delete</p>
+                                                    <p onClick={() => {
+                                                        handleDelete(hiker.id)
+                                                
+                                                    }}>Delete</p>
                                                 </div>
                                             )}
                                         </div>
-
-                                    </div>
+                                    
                                     {/* Below creates a separate deletion confirmation modal for each individual hiker so it has access to the hiker id for deletion */}
-                                    <Modal
+                                    {/* <Modal
                                         show={showDelete}
                                         onHide={handleDeleteClose}
                                         backdrop="static"
-                                        beyboard={false}>
+                                        keyboard={false}>
                                         <Modal.Header>
                                             <Modal.Title>Deletion Confirmation</Modal.Title>
                                         </Modal.Header>
@@ -177,14 +173,17 @@ export default function Profile() {
                                             <Button variant="secondary" onClick={handleDeleteClose}>Cancel</Button>
                                             <Button variant="danger" onClick={() => {
                                                 handleDeleteClose()
-                                                handleDelete(hiker.id)
+                                                // handleDelete(hiker.id)
+                                                console.log(hiker.id)
                                             }}>Delete</Button>
                                         </Modal.Footer>
-                                    </Modal>
+                                    </Modal> */}
+                                    </div>
                                 </>
                             ) : (
                                 null
                             )
+                            
                         ))}
                     </div>
                 </section>
@@ -200,12 +199,12 @@ export default function Profile() {
 
                             if (matchingTrail) {
                                 return (
-                                 
-                                        <div key={review.id} className="profile-review">
-                                            <p className="profile-review-text"><Link to={`/trails/${review.trail.id}`}>{review.trail.name}</Link>- {review.text}</p>
-                                            <TimeStamp timestamp={review.created_at} />
-                                        </div>
-                                  
+
+                                    <div key={review.id} className="profile-review">
+                                        <p className="profile-review-text"><Link to={`/trails/${review.trail.id}`}>{review.trail.name}</Link>- {review.text}</p>
+                                        <TimeStamp timestamp={review.created_at} />
+                                    </div>
+
                                 );
                             }
 

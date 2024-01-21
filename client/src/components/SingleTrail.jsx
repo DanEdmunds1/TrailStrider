@@ -6,12 +6,12 @@ import { deleteTrail } from "../utils/actions/trail"
 import { deleteReview } from "../utils/actions/review"
 import { activeUser } from "../utils/helpers/common.js"
 import EditTrail from "./EditTrail.jsx"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import StarRating from "./StarRating.jsx"
-import ReviewTrail from "./ReviewTrail.jsx"
 import TimeStamp from "./TimeStamp.jsx"
+import { getWeather } from "../utils/loaders/weather.js"
 
 export default function SingleTrail() {
 
@@ -20,6 +20,7 @@ export default function SingleTrail() {
     const loadedData = useLoaderData()
     const { trail, hikers, reviews } = loadedData
     const navigate = useNavigate()
+
 
 
     async function handleDelete(id) {
@@ -51,20 +52,11 @@ export default function SingleTrail() {
     }
 
 
-    console.log(reviews)
-
     const reviewsForHere = reviews.filter(review => {
         if (review.trail.id === trail.id) {
             return review
         }
     })
-
-    console.log(reviewsForHere)
-
-
-
-
-
 
 
     const [showEdit, setShowEdit] = useState(false)
@@ -83,12 +75,20 @@ export default function SingleTrail() {
         setShowOptions(showOptions === index ? null : index)
     }
 
-    // const [showReview, setShowReview] = useState(false)
-    // const handleReviewClose = () => setShowReview(false)
-    // const handleReviewShow = () => setShowReview(true)
+    const [weatherData, setWeatherData] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getWeather([trail.region]);
+                setWeatherData(data);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        };
 
-
-
+        fetchData();
+    }, [])
+    console.log(trail)
     return (
         <>
             <EditTrail showEdit={showEdit} handleEditClose={handleEditClose} />
@@ -113,10 +113,26 @@ export default function SingleTrail() {
                                 <h2>{trail.region.name}</h2>
                                 <img className="single-trail-image" src={trail.image} alt="Trail Image" />
                                 <StarRating />
-                                <div className="trail-detail-box">
-                                    <div><span className="title">Distance:</span> {trail.length}km</div>
-                                    <div><span className="title">Elevation:</span> {trail.elevation}m</div>
-                                    <div><span className="title">Descent:</span> {trail.descent}m</div>
+                                <div className="stats-n-weather">
+                                    <div className="trail-detail-box">
+                                        <div><span className="title">Distance:</span> {trail.length}km</div>
+                                        <div><span className="title">Elevation:</span> {trail.elevation}m</div>
+                                        <div><span className="title">Descent:</span> {trail.descent}m</div>
+                                    </div>
+                                    <div className="weather">
+                                        {weatherData ?
+                                            <>
+                                            <h4>Weather</h4>
+                                            <p><span>Current Condition: </span>{weatherData.forecast.forecastday[0].day.condition.text}</p>
+                                                <p><span>Current Temperature (C): </span>{weatherData.forecast.forecastday[0].day.avgtemp_c}</p>
+                                            </>
+                                            :
+                                            <>
+                                            <p>No data found for trail location</p>
+                                            </>
+                                        }
+
+                                    </div>
                                 </div>
                             </section>
 

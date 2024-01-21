@@ -41,7 +41,7 @@ export default function AllTrails() {
         <>
         <CreateTrail showCreate={showCreate} handleCreateClose={handleCreateClose} />
 
-            <h1>ALL TRAILS</h1>
+            <h1 className="all-trails">ALL TRAILS</h1>
             <button className="trail-single-buttons" onClick={handleCreateShow}>Create Trail</button>
             <Filters searchTrails={searchTrails} setFilteredSearchTrails={setFilteredSearchTrails} filteredSearchTrails={filteredSearchTrails} />
             <section className="trail-card-container">
