@@ -4,7 +4,7 @@ from .serializers.populated import PopulatedReviewSerializer
 from .models import Review
 from lib.views import OwnerListCreateView
 from lib.permissions import IsOwnerOrReadOnly
-from .serializers.populated import PopulatedReviewSerializer
+
 
 # Path: /reviews/
 # Methods: GET, POST
