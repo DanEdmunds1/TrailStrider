@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
 
-    let int = 100000
-    //7000
+    let int = 7000
+
     const data = useLoaderData()
     const { trails } = data
 
