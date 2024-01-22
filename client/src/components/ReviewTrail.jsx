@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import { Form, useActionData, useLoaderData, useNavigate } from "react-router-dom"
-import Modal from 'react-bootstrap/Modal'
 
 // eslint-disable-next-line react/prop-types
-export default function ReviewTrail({ showReview, handleReviewClose }) {
+export default function ReviewTrail() {
     const res = useActionData()
     const data = useLoaderData()
     const { trail } = data
