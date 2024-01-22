@@ -101,10 +101,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env('DATABASE_NAME'),
-        'HOST': 'postgresql://DanEdmunds1:2SJpCR8AyVDo@ep-lingering-forest-a21v6wvk.eu-central-1.aws.neon.tech/neondb?sslmode=require',
+        'HOST': env('DATABASE_HOST'),
         'PORT': 5432,
         'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD')
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'OPTIONS': {'sslmode': 'require'}
     }
 }
 
