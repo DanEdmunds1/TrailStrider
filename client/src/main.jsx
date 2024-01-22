@@ -8,13 +8,17 @@ import Home from './components/Home.jsx'
 import AllTrails from './components/AllTrails.jsx'
 import SingleTrail from './components/SingleTrail.jsx'
 import Profile from './components/Profile.jsx'
+import CreateTrail from './components/CreateTrail.jsx'
+import EditTrail from './components/EditTrail.jsx'
+import ReviewTrail from './components/ReviewTrail.jsx'
+import CreateHiker from './components/CreateHiker.jsx'
 import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
-import ReviewTrail from './components/ReviewTrail.jsx'
 // Loaders
 import { trailLoader, singleTrailLoader } from './utils/loaders/trail.js'
-import { createTrail, editTrail } from './utils/actions/trail.js'
-import { createHiker } from './utils/actions/hiker.js'
+import { createTrail, deleteTrail, editTrail } from './utils/actions/trail.js'
+import { createHiker, deleteHiker } from './utils/actions/hiker.js'
+import { getRegions } from './utils/loaders/regions.js'
 import { loginUser, registerUser } from './utils/actions/auth.js'
 import { getAllReviews } from './utils/loaders/reviews.js'
 import { createReview } from './utils/actions/review.js'
@@ -49,10 +53,27 @@ const router = createBrowserRouter([
         loader: async ({ params }) => singleTrailLoader(params.trailId)
       },
       {
+        path: '/trails/:trailId/review',
+        element: <ReviewTrail />,
+        action: async ({ request }) => createReview(request),
+        loader: async ({ params }) => singleTrailLoader(params.trailId)
+      },
+      {
+        path: '/trails/:trailId/review',
+        element: <ReviewTrail />,
+        action: async ({ request }) => createReview(request),
+        loader: async ({ params }) => singleTrailLoader(params.trailId)
+      },
+      {
         path: '/profile',
         element: <Profile />,
         loader: getAllReviews,
         action: async ({ request }) => createHiker(request)
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+        loader: getAllReviews
       },
       {
         path: '/register',

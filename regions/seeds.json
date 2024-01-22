@@ -1,0 +1,26 @@
+[
+{
+  "model": "regions.region",
+  "pk": 1,
+  "fields": {
+    "name": "Surrey",
+    "country": 1
+  }
+},
+{
+  "model": "regions.region",
+  "pk": 2,
+  "fields": {
+    "name": "Chumbawumba",
+    "country": 4
+  }
+},
+{
+  "model": "regions.region",
+  "pk": 3,
+  "fields": {
+    "name": "Boonsville",
+    "country": 5
+  }
+}
+]

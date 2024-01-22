@@ -102,8 +102,12 @@ export default function CreateTrail({ showCreate, handleCreateClose }) {
 
                         {/* <input id="image" type="text" name="image" placeholder='Image' onChange={handleChange} /> */}
 
-                        <label hidden htmlFor="region">Region</label>
-                        <input id="region" type="text" name="region" placeholder='Region' onChange={handleChange} value={formData.region} />
+                <label hidden htmlFor="region">Region</label>
+                <input type="text" name="region" placeholder='Region' />
+
+                <input type="text" name="owner" placeholder='Owner' />
+
+                <input type="text" name="difficulty" placeholder='Region' />
 
                         {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
 

@@ -17,6 +17,6 @@ class RegionDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Region.objects.all()
 
     def get_serializer_class(self):
-        if self.request.emthod == 'GET':
+        if self.request.method == 'GET':
             return PopulatedRegionSerializer
         return RegionSerializer
