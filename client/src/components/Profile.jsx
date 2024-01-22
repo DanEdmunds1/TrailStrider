@@ -6,6 +6,9 @@ import icon4 from '../assets/avatars/icon4.png'
 import icon5 from '../assets/avatars/icon5.png'
 import icon6 from '../assets/avatars/icon6.png'
 import icon7 from '../assets/avatars/icon7.png'
+import icon8 from '../assets/avatars/icon8.png'
+import icon9 from '../assets/avatars/icon9.png'
+import icon10 from '../assets/avatars/icon10.png'
 
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
@@ -41,6 +44,9 @@ export default function Profile() {
         icon5,
         icon6,
         icon7,
+        icon8,
+        icon9,
+        icon10,
     ]
 
 
@@ -131,7 +137,7 @@ export default function Profile() {
             {/* Use localsotrage setting and gettign to keep the profile picture */}
             <article className="profile-top">
                 <div className="user-zone">
-                    <img id="pfp" src={userImage} alt="Selected Image" className="avatar-img" />
+                    <img id="pfp" src={userImage} alt="Selected Image"/>
                     <button onClick={handleShow}>Select Profile Picture</button>
                 </div>
                 <section className="hiker-display">

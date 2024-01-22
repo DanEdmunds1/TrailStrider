@@ -101,7 +101,7 @@ export default function SingleTrail() {
                         <Col className="trail-info" xs={12} md={6} lg={4}>
                             <h1>{trail.name}</h1>
                             <section className="trail-data">
-                                {user.user_id === trail.owner ?
+                                {user && user.user_id === trail.owner ?
                                     <>
                                         <button className="trail-single-buttons" onClick={() => handleDeleteShow()}>Delete Trail</button>
                                         <button className="trail-single-buttons" onClick={handleEditShow}>Edit Trail</button>
@@ -120,7 +120,7 @@ export default function SingleTrail() {
                                         <div><span className="title">Descent:</span> {trail.descent}m</div>
                                     </div>
                                     <div className="weather">
-                                        {weatherData ?
+                                        {weatherData && weatherData.forecastday ?
                                             <>
                                             <h4>Weather</h4>
                                             <p><span>Current Condition: </span>{weatherData.forecast.forecastday[0].day.condition.text}</p>
@@ -141,7 +141,7 @@ export default function SingleTrail() {
                             <h3>Your Hikers</h3>
                             <div className="hiker-box">
                                 {hikers.map(hiker => {
-                                    if (user.user_id === hiker.owner) {
+                                    if (user && user.user_id === hiker.owner) {
                                         let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
                                         let steps = Math.ceil((trail.length * 100000) / stride)
                                         let duration = (trail.length / (Number(hiker.ability) * 1.609))
@@ -179,7 +179,7 @@ export default function SingleTrail() {
                                             <TimeStamp timestamp={review.created_at} />
                                         </div>
                                     </div>
-                                    {user.user_id === review.owner.id && (
+                                    {user && user.user_id === review.owner.id && (
                                         <>
                                             <div
                                                 className="review-options"

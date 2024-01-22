@@ -32,7 +32,7 @@ export default function CreateHiker({ showHikerCreate, handleHikerCreateClose, a
         const avatarElements = document.querySelectorAll('.avatar-img')
         // eslint-disable-next-line react/prop-types
         avatarElements.forEach((avatar, i) => {
-            if (i === index + 1) {
+            if (i === index) {
                 avatar.classList.add('selected')
             } else {
                 avatar.classList.remove('selected')
@@ -66,6 +66,8 @@ export default function CreateHiker({ showHikerCreate, handleHikerCreateClose, a
             ability.classList.add('empty')
         }
     }
+
+    // <a href="https://www.flaticon.com/free-icons/landscape" title="landscape icons">Landscape icons created by Freepik - Flaticon</a>
 
 
     return (
