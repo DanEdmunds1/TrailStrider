@@ -31,12 +31,12 @@ export default function ReviewTrail() {
                     Trail Review
                 </Modal.Header>
                 <Modal.Body> */}
-                    <Form className='form' method="POST">
+                    <Form id="post-review" className='form' method="POST">
                         <label hidden htmlFor="text">Text</label>
                         <textarea name="text" placeholder='Text'></textarea>
 
                         <label hidden htmlFor="trail">Trail</label>
-                        <input type="text" name="trail" value={trail.id} readOnly />
+                        <input type="hidden" name="trail" value={trail.id} readOnly />
 
                         {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
 

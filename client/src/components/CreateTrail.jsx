@@ -105,9 +105,9 @@ export default function CreateTrail({ showCreate, handleCreateClose }) {
                 <label hidden htmlFor="region">Region</label>
                 <input type="text" name="region" placeholder='Region' />
 
-                <input type="text" name="owner" placeholder='Owner' />
+                <input type="hidden" name="owner" placeholder='Owner' />
 
-                <input type="text" name="difficulty" placeholder='Region' />
+                <input type="number" name="difficulty" placeholder='Difficulty' />
 
                         {res?.data?.message && <p className='danger bold mt-4'>{res.data.message}</p>}
 

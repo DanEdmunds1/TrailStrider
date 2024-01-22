@@ -89,7 +89,8 @@ export default function SingleTrail() {
         fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    console.log(trail)
+
+
     return (
         <>
             <EditTrail showEdit={showEdit} handleEditClose={handleEditClose} />
@@ -121,7 +122,7 @@ export default function SingleTrail() {
                                         <div><span className="title">Descent:</span> {trail.descent}m</div>
                                     </div>
                                     <div className="weather">
-                                        {weatherData && weatherData.forecastday ?
+                                        {weatherData && weatherData.forecast.forecastday[0] ?
                                             <>
                                             <h4>Weather</h4>
                                             <p><span>Current Condition: </span>{weatherData.forecast.forecastday[0].day.condition.text}</p>
@@ -145,10 +146,10 @@ export default function SingleTrail() {
                                     if (user && user.user_id === hiker.owner) {
                                         let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
                                         let steps = Math.ceil((trail.length * 100000) / stride)
-                                        let duration = (trail.length / (Number(hiker.ability) * 1.609))
-                                        let totalMinutes = Math.floor(duration * 60)
+                                        let duration = (trail.length / (hiker.ability) * 1.609)
+                                        let totalMinutes = Math.floor(duration * 60) + (trail.elevation / 10) - (trail.descent / 30)
                                         let hours = Math.floor(totalMinutes / 60)
-                                        let minutes = (totalMinutes % 60)
+                                        let minutes = Math.floor(totalMinutes % 60)
 
                                         return (
                                             <div key={hiker.id} className="hiker-container">

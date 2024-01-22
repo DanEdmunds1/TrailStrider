@@ -5,7 +5,7 @@ import CreateTrail from "./CreateTrail"
 
 export default function AllTrails() {
     const loadedData = useLoaderData()
-    const { trails, hikers } = loadedData
+    const { trails } = loadedData
 
     // const hiker = hikers[0]
     // let stride = (((hiker.height * 100) / 2.54) * 0.413) * 2.54
